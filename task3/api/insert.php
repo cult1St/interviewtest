@@ -23,7 +23,7 @@ $data = json_decode($data);
 
 
 
-if(!isset($data->number) || !isset($data->network) || !isset($data->message) || !isset($data->ref_code)){
+if(!isset($data->number) || !isset($data->network) || !isset($data->message)){
     http_response_code(400);
     $response = [
         "status"=> "failure",
@@ -33,7 +33,7 @@ if(!isset($data->number) || !isset($data->network) || !isset($data->message) || 
     echo json_encode($response);
     exit();
 }
-if(empty($data->number) || empty($data->network) || empty($data->message) || empty($data->ref_code)){
+if(empty($data->number) || empty($data->network) || empty($data->message)){
     http_response_code(400);
     $response = [
         "status"=> "failure",
@@ -44,6 +44,7 @@ if(empty($data->number) || empty($data->network) || empty($data->message) || emp
     exit();
 }
 $network1 = new Network();
+$data->ref_code = time().rand();
 $insert = $network1->insert_network($data->number, $data->network, $data->message, $data->ref_code);
 if($insert){
     http_response_code(200);
