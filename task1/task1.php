@@ -9,3 +9,5 @@
     $encrypted =openssl_encrypt($text, $cipher,$pass, $options, $iv);
     echo bin2hex($encrypted);
 
+    echo openssl_decrypt($encrypted,  $cipher,$pass, $options, $iv);
+
